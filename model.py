@@ -136,7 +136,7 @@ else:  # If dataset is not created:
 train = train_data
 
 X_train = np.array([i[0] for i in train]).reshape(-1, IMG_SIZE, IMG_SIZE, 3)
-X_train = X_train / 255
+##X_train = X_train / 255
 
 y_train = [i[1] for i in train]
 
@@ -223,7 +223,7 @@ net = tflearn.regression(softmax, optimizer='adam', learning_rate=0.0001,
 
 # Training
 model1 = tflearn.DNN(net, tensorboard_verbose=0)
-model1.fit(x, y_train, n_epoch=120, validation_set=0,
+model1.fit(x, y_train, n_epoch=10, validation_set=0,
            show_metric=True, run_id="model")
 
 
@@ -244,7 +244,7 @@ with open('Predictions.csv', mode='w') as test_file:
             test_img = cv2.resize(img, (IMG_SIZE, IMG_SIZE))
             ## test_img = preprocessing_img(test_img)
             test_img = test_img.reshape(IMG_SIZE, IMG_SIZE, 3)
-            test_img = test_img / 255
+           ## test_img = test_img / 255
             prediction = model.predict([test_img])[0]
             pp = model1.predict([prediction])[0]
             p = np.argmax(pp)
